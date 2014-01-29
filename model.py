@@ -62,6 +62,7 @@ class Collection(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
+    terms = relationship("Term")
 
 class Term(Base):
     __tablename__ = "terms"

@@ -1,4 +1,4 @@
-from wtforms import Form, TextField, TextAreaField, PasswordField, validators
+from wtforms import Form, TextField, TextAreaField, PasswordField, HiddenField, validators, IntegerField
 
 class LoginForm(Form):
     email = TextField("Email", [validators.Required(), validators.Email()])
@@ -11,6 +11,10 @@ class NewPostForm(Form):
 class NewCollectionForm(Form):
     title = TextField("title", [validators.Required()])
     description = TextAreaField("description", [validators.Required()])
+
+class NewTermForm(Form):
+    term = TextField("term", [validators.Required()])
+    definition = TextAreaField("definition", [validators.Required()])
 
 class RegisterForm(Form):
     email = TextField("Email", [validators.Required(), validators.Email()])

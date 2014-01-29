@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Post, Collection
+from model import User, Post, Collection, Term
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 from flaskext.markdown import Markdown
 import config
@@ -66,10 +66,37 @@ def create_post():
 
     return redirect(url_for("view_post", id=post.id))
 
+@app.route("/user/<int:id>")
+def view_user(id):
+    user = User.query.get(id)
+    first_name = user.first_name
+    collections = user.collections
+    return render_template("user.html", first_name=first_name, collections=collections)
+
+@app.route("/collections")
+def collections():
+    collections = Collection.query.all()
+    return render_template("collections.html", collections=collections)
+
+
 @app.route("/collection/<int:id>")
 def view_collection(id):
-    collection = Post.query.get(id)
+    collection = Collection.query.get(id)
     return render_template("collection.html", collection=collection)
+
+@app.route("/collection/<int:id>", methods=["POST"])
+@login_required
+def create_term(id):
+    form = forms.NewTermForm(request.form)
+    if not form.validate():
+        flash("Error, all fields are required")
+    else:
+        term = Term(term=form.term.data, definition=form.definition.data, user_id=current_user.id, collection_id=id)
+        model.session.add(term)
+        model.session.commit()
+        model.session.refresh(term)
+
+    return redirect(url_for("view_collection", id=id))
 
 @app.route("/collection/new")
 @login_required
@@ -144,7 +171,7 @@ def create_user():
         model.session.commit()
         login_user(user)
 
-    return render_template("register.html")
+    return url_for("index")
 
 @app.route("/logout")
 def logout():

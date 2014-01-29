@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+This is a page for all the collections belonging to a particular user
+
+{{ first_name }}'s collections
+
+</ul>
+{% for collection in collections %}
+<li><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</li>
+
+
+{% endfor %}
+
+{% endblock %}
