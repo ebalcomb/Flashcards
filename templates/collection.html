@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
-This is a page for one set of cards
-
 {% block body %}
-<h2>{{collection.title}}</h2>
-<p>
-{{collection.description}}
+<h1>{{collection.title}}</h1>
+<h2>{{collection.description}}</h2>
 
-</p>
+<p><a class="btn btn-primary btn-lg" role="button">Study</a></p>
+
 terms:
+<ul>
 {% for term in collection.terms %}
-<p>
-{{term.term}}-{{term.definition}}
+<li>{{term.term}}: {{term.definition}}</li>
 {% endfor %}
+</ul>
 
+
+{% if collection.user_id == current_user.id %}
 <p>
 add term:
 </p>
-
 <form method="post">
     <input type="text" name="term" placeholder="Term"><br>
     <textarea name="definition" placeholder="Definition"></textarea><br>
     <input type="submit">
 </form>
-
+{% endif %}
 
 {% endblock %}

@@ -41,6 +41,7 @@ def contact():
 
 
 @app.route("/post/<int:id>")
+@login_required
 def view_post(id):
     post = Post.query.get(id)
     return render_template("post.html", post=post)
@@ -67,11 +68,28 @@ def create_post():
     return redirect(url_for("view_post", id=post.id))
 
 @app.route("/user/<int:id>")
+@login_required
 def view_user(id):
     user = User.query.get(id)
     first_name = user.first_name
+    user_id = user.id
     collections = user.collections
-    return render_template("user.html", first_name=first_name, collections=collections)
+    return render_template("user.html", user_id=user_id, first_name=first_name, collections=collections)
+
+@app.route("/user/<int:id>", methods=["POST"])
+@login_required
+def create_collection(id):
+    form = forms.NewCollectionForm(request.form)
+    if not form.validate():
+        flash("Error, all fields are required")
+    else:
+        collection = Collection(title=form.title.data, description=form.description.data, user_id=current_user.id)
+        #current_user.collections.append(collection)
+
+        model.session.add(collection)
+        model.session.commit()
+
+    return redirect(url_for("view_user", id=current_user.id))
 
 @app.route("/collections")
 def collections():
@@ -98,27 +116,6 @@ def create_term(id):
 
     return redirect(url_for("view_collection", id=id))
 
-@app.route("/collection/new")
-@login_required
-def new_collection():
-    return render_template("new_collection.html")
-
-@app.route("/collection/new", methods=["POST"])
-@login_required
-def create_collection():
-    form = forms.NewCollectionForm(request.form)
-    if not form.validate():
-        flash("Error, all fields are required")
-        return render_template("new_collection.html")
-
-    collection = Collection(title=form.title.data, description=form.description.data, user_id=current_user.id)
-    current_user.collections.append(collection) 
-    
-    model.session.add(collection)
-    model.session.commit()
-    model.session.refresh(collection)
-
-    return redirect(url_for("index"))
 
 @app.route("/login")
 def login():
@@ -174,6 +171,7 @@ def create_user():
     return url_for("index")
 
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     return redirect(url_for("index"))

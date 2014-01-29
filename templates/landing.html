@@ -2,9 +2,14 @@
 
 {% block body %}
 
-<h1>Welcome</h1>
-<h2><a href="{{url_for("login")}}">Log In</a></h2>
-<h2><a href="{{url_for("register")}}">Register</a></h2>
-
+<div class="hero-unit">
+	<div class="container">
+  		<h1>Flashcards</h1>
+  		<br>
+  		<p>This is my application!</p>
+  		<br>
+  		<p><a class="btn btn-primary btn-lg" role="button" href="{{url_for("register")}}">Register</a></p>
+	</div>
+</div>
 
 {% endblock %}

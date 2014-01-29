@@ -3,15 +3,22 @@
 
 {% block body %}
 
-This is a page for all the collections belonging to a particular user
+<h1>{{ first_name }}'s collections</h1>
 
-{{ first_name }}'s collections
-
-</ul>
+<ul>
 {% for collection in collections %}
-<li><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</li>
-
-
+<li><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</a></li>
 {% endfor %}
+</ul>
+
+{% if user_id == current_user.id %}
+<h2>Create new</h2>
+<form method="post"> 
+    <input type="text" name="title" placeholder="Collection Title"><br>
+    <textarea name="description" placeholder="Description"></textarea><br>
+    <input type="submit">
+</form>
+{% endif %}
+
 
 {% endblock %}
