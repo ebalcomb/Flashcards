@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+
 {% block body %}
+
+<h1>My Posts</h1>
+<a href="{{url_for("new_post")}}">New post</a>
 {% for post in posts %}
 <div class="post">
     <h2><a href="{{url_for("view_post", id=post.id)}}">{{post.title}}</a></h2>
@@ -7,8 +11,22 @@
         {{post.body | markdown}}
     </p>
 </div>
-{% else %}
-No posts here!
-<a href="{{url_for("new_post")}}">New post</a>
-{% endfor %}
+
+<h1>My Collections</h1>
+<a href="{{url_for("new_collection")}}">New collection</a>
+{% for collection in collections %}
+<div class="post">
+    <p><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</a></p>
+</div>
+</ul>
+
+<h1>My Friends</h1>
+
+
 {% endblock %}
+
+
+
+
+
+

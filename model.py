@@ -21,12 +21,14 @@ Base.query = session.query_property()
 class User(Base, UserMixin):
     __tablename__ = "users" 
     id = Column(Integer, primary_key=True)
+    first_name = Column(String(64), nullable=False)
+    last_name = Column(String(64), nullable=False)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
 
     posts = relationship("Post", uselist=True)
-    groups = relationship("Group", uselist=True)
+    collections = relationship("Collection", uselist=True)
     terms = relationship("Term", uselist=True)
 
     def set_password(self, password):
@@ -50,11 +52,13 @@ class Post(Base):
 
     user = relationship("User")
 
-class Group(Base):
-    __tablename__ = "groups"
+class Collection(Base):
+    __tablename__ = "collections"
 
     id = Column(Integer, primary_key=True)
     title = Column(String(64), nullable=False)
+    description = Column(String(128), nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
@@ -64,11 +68,12 @@ class Term(Base):
 
     id = Column(Integer, primary_key=True)
     term = Column(String(64), nullable=False)
-    group_id = Column(Integer, ForeignKey("groups.id"))
+    definition = Column(String(128), nullable=False)
+    collection_id = Column(Integer, ForeignKey("collections.id"))
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
-    group = relationship("Group")
+    collection = relationship("Collection")
 
 
 
@@ -77,7 +82,7 @@ class Term(Base):
 
 def create_tables():
     Base.metadata.create_all(engine)
-    u = User(email="test@test.com")
+    u = User(email="test@test.com", first_name="John", last_name="Doe")
     u.set_password("unicorn")
     session.add(u)
     p = Post(title="This is a test post", body="This is the body of a test post.")

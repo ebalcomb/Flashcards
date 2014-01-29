@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Post
+from model import User, Post, Collection
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 from flaskext.markdown import Markdown
 import config
@@ -25,8 +25,20 @@ Markdown(app)
 
 @app.route("/")
 def index():
-    posts = Post.query.all()
-    return render_template("index.html", posts=posts)
+    if current_user.is_authenticated():
+        collections = Collection.query.filter_by(user_id=current_user.id)
+        return render_template("index.html", collections=collections)
+    else:
+        return render_template("landing.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
 
 @app.route("/post/<int:id>")
 def view_post(id):
@@ -53,6 +65,33 @@ def create_post():
     model.session.refresh(post)
 
     return redirect(url_for("view_post", id=post.id))
+
+@app.route("/collection/<int:id>")
+def view_collection(id):
+    collection = Post.query.get(id)
+    return render_template("collection.html", collection=collection)
+
+@app.route("/collection/new")
+@login_required
+def new_collection():
+    return render_template("new_collection.html")
+
+@app.route("/collection/new", methods=["POST"])
+@login_required
+def create_collection():
+    form = forms.NewCollectionForm(request.form)
+    if not form.validate():
+        flash("Error, all fields are required")
+        return render_template("new_collection.html")
+
+    collection = Collection(title=form.title.data, description=form.description.data, user_id=current_user.id)
+    current_user.collections.append(collection) 
+    
+    model.session.add(collection)
+    model.session.commit()
+    model.session.refresh(collection)
+
+    return redirect(url_for("index"))
 
 @app.route("/login")
 def login():
@@ -83,11 +122,14 @@ def register():
 
 @app.route("/register", methods=["POST"])
 def create_user():
-    form = forms.LoginForm(request.form)
+    form = forms.RegisterForm(request.form)
+    print "form variable!"
     if not form.validate():
         flash("username not valid")
         return render_template("register.html")
 
+    first_name=form.first_name.data
+    last_name=form.last_name.data
     email=form.email.data
     password=form.password.data
 
@@ -95,11 +137,12 @@ def create_user():
     if existing:
         flash("username already taken")
     else:
-        user = User(email=email, password=password, salt="random")
+        user = User(email=email, first_name=first_name, last_name=last_name, password=password, salt="random")
         user.set_password(password)
 
         model.session.add(user)
         model.session.commit()
+        login_user(user)
 
     return render_template("register.html")
 
