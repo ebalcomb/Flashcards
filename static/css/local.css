@@ -1,8 +1,13 @@
 .log {color:gray; margin-top: 11px;}
 .logout {text-decoration: underline;}
-.herounit {background-color: red;}
-
+.hero-unit {color:white; background-image: url("/static/img/red.jpeg"); background-size:40%;}
+.nav {font-size: 16;}
+.term {font-size: 30; padding: 20px;}
+.definition {font-size: 20; padding:20px;}
 .invisible {visibility:hidden;}
+.main {font-size: 100;}
 
-.card {background-color: white}
-body {background-color: #CC9999;}
+.card {background-color: white; color:black; border-radius: 20px;width:200px;height:250px;float:left;margin:10px;}
+body {background-color: #00808A; color:white;font-size:14;}
+h1 {color:white;}
+a {color:#FFA400;}
