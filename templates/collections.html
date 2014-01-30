@@ -5,6 +5,12 @@
 <h1>Collections</h1>
 </ul>
 {% for collection in collections %}
-<li><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</li>
+<a href="{{url_for("view_collection", id=collection.id)}}">
+<div class="collection">
+		<p class="collection_title">{{collection.title}}</p>
+		<p class="collection_description">{{collection.description}}</p>
+</div>
+</a>
+
 {% endfor %}
 {% endblock %}

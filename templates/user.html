@@ -5,20 +5,29 @@
 
 <h1>{{ first_name }}'s collections</h1>
 
-<ul>
-{% for collection in collections %}
-<li><a href="{{url_for("view_collection", id=collection.id)}}">{{collection.title}}-{{collection.description}}</a></li>
-{% endfor %}
-</ul>
-
 {% if user_id == current_user.id %}
-<h2>Create new</h2>
-<form method="post"> 
+
+<h3>Create new</h3>
+<form id = "form_collection" method="post"> 
     <input type="text" name="title" placeholder="Collection Title"><br>
     <textarea name="description" placeholder="Description"></textarea><br>
     <input type="submit">
 </form>
+
 {% endif %}
+{% for collection in collections %}
+	<div class="collection">
+		<a href="{{url_for("view_collection", id=collection.id)}}">
+		<p class="collection_title">{{collection.title}}</p>
+		<p class="collection_description">{{collection.description}}</p>
+		</a>
+		{% if collection.user_id == current_user.id %}
+		<a href="{{url_for("delete_collection", user_id=collection.user_id, collection_id=collection.id)}}"><div class="trash"><i class="icon-trash"></i></div></a>
+		{% endif %}
+	</div>
+
+{% endfor %}
+
 
 
 {% endblock %}

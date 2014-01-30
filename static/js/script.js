@@ -1,18 +1,18 @@
 $(document).ready(function() {
 	$("#termfirst").click(function(){
-		$(".term").removeClass("invisible secondary");
-		$(".term").addClass("primary");
-		$(".definition").addClass("invisible secondary");
-		$(".definition").removeClass("primary");
+		$(".card_term").removeClass("invisible secondary");
+		$(".card_term").addClass("primary");
+		$(".card_definition").addClass("invisible secondary");
+		$(".card_definition").removeClass("primary");
 	});
 });
 
 $(document).ready(function() {
 	$("#definitionfirst").click(function(){
-		$(".definition").removeClass("invisible secondary");
-		$(".definition").addClass("primary");
-		$(".term").addClass("invisible secondary");
-		$(".term").removeClass("primary");
+		$(".card_definition").removeClass("invisible secondary");
+		$(".card_definition").addClass("primary");
+		$(".card_term").addClass("invisible secondary");
+		$(".card_term").removeClass("primary");
 	});
 });
 

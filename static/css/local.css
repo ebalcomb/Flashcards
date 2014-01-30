@@ -1,13 +1,25 @@
 .log {color:gray; margin-top: 11px;}
 .logout {text-decoration: underline;}
 .hero-unit {color:white; background-image: url("/static/img/red.jpeg"); background-size:40%;}
-.nav {font-size: 16;}
-.term {font-size: 30; padding: 20px;}
+.nav {font-size: 18;}
+.trash {text-align:right;}
+
+.term_show {background-color:white; border-radius: 20px; width:200px; padding: 20px; margin:10px;float:left;}
+.term {background-color:white; border-radius: 20px; margin:10px;float:left;}
+.term_title {font-size: 25;}
+
 .definition {font-size: 20; padding:20px;}
 .invisible {visibility:hidden;}
 .main {font-size: 100;}
 
-.card {background-color: white; color:black; border-radius: 20px;width:200px;height:250px;float:left;margin:10px;}
-body {background-color: #00808A; color:white;font-size:14;}
-h1 {color:white;}
+.card {background-color:white;color:black; border-radius: 20px;width:200px;height:250px;float:left;margin:10px;}
+.card_term {font-size: 25; padding: 10px; margin:5px;color:#FFA900;}
+.card_definition {font-size: 20; padding: 10px; margin:5px;}
+
+.collection {background-color: #FE3F44; color:white; border-radius: 20px;width:250px;height:150px;float:left;margin:10px;}
+.collection_title{font-size: 25; padding: 10px; margin:5px;color:#FFCF73;}
+.collection_description{font-size: 16; padding: 10px; margin:5px;}
+
+body {background-color: #00808A;font-size:14;}
+h1 {color:#FFCF73;}
 a {color:#FFA400;}

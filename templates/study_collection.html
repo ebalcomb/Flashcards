@@ -8,12 +8,13 @@
   <button type="button" id="termfirst" class="btn btn-default">Show Terms</button>
   <button type="button" id="definitionfirst" class="btn btn-default">Show Definitions</button>
 </div>
+
 <br>
 
 {% for term in collection.terms %}
 <div class="card">
-<p class="term primary">{{term.term}}</p>
-<p class="definition secondary invisible">{{term.definition}}</p>
+<p class="card_term primary">{{term.term}}</p>
+<p class="card_definition secondary invisible">{{term.definition}}</p>
 </div>
 
 {% endfor %}

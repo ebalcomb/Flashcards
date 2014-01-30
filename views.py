@@ -89,7 +89,7 @@ def create_collection(id):
         model.session.add(collection)
         model.session.commit()
 
-    return redirect(url_for("view_user", id=current_user.id))
+    return redirect(url_for("view_user", id=current_user.user_id))
 
 @app.route("/collections")
 def collections():
@@ -120,6 +120,24 @@ def create_term(id):
         model.session.refresh(term)
 
     return redirect(url_for("view_collection", id=id))
+
+@app.route("/collection/<int:term_id>/<int:collection_id>")
+@login_required
+def delete_term(term_id, collection_id):
+    term = Term.query.get(term_id)
+    model.session.delete(term)
+    model.session.commit()
+
+    return redirect(url_for("view_collection", id=collection_id))
+
+@app.route("/user/<int:user_id>/<int:collection_id>")
+@login_required
+def delete_collection(user_id, collection_id):
+    collection = Collection.query.get(collection_id)
+    model.session.delete(collection)
+    model.session.commit()
+
+    return redirect(url_for("view_user", id=user_id))
 
 
 @app.route("/login")
