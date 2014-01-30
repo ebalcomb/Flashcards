@@ -1,3 +1,8 @@
 .log {color:gray; margin-top: 11px;}
 .logout {text-decoration: underline;}
 .herounit {background-color: red;}
+
+.invisible {visibility:hidden;}
+
+.card {background-color: white}
+body {background-color: #CC9999;}

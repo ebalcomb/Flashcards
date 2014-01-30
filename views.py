@@ -102,6 +102,11 @@ def view_collection(id):
     collection = Collection.query.get(id)
     return render_template("collection.html", collection=collection)
 
+@app.route("/collection/<int:id>/study")
+def study_collection(id):
+    collection = Collection.query.get(id)
+    return render_template("study_collection.html", collection=collection)
+
 @app.route("/collection/<int:id>", methods=["POST"])
 @login_required
 def create_term(id):
