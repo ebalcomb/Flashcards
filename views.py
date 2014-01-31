@@ -191,7 +191,7 @@ def create_user():
         model.session.commit()
         login_user(user)
 
-    return url_for("index")
+    return redirect(url_for("index"))
 
 @app.route("/logout")
 @login_required

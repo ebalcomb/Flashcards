@@ -17,6 +17,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+	$("#showboth").click(function(){
+		$(".card_definition").removeClass("invisible secondary");
+		$(".card_definition").addClass("primary");
+		$(".card_term").removeClass("invisible secondary");
+		$(".card_term").removeClass("primary");
+	});
+});
+
+$(document).ready(function() {
 	$(".card").click(function(){
 		$(this).children(".secondary").removeClass("invisible");
 	});
