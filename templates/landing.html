@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="landing_body">
 
-<div class="hero-unit">
-	<div class="container">
 		<br>
   		<div class="main">flashcards</div>
   		<br>
   		<br>
   		<br>
-  		<p>This is my application!</p>
   		<br>
-  		<p><a class="btn btn-primary btn-lg" role="button" href="{{url_for("register")}}">Register</a></p>
-	</div>
-</div>
+  		<div class="register"><a id="register" class="btn btn-primary btn-lg" role="button" href="{{url_for("register")}}">Register</a><div>
 
+</div>
 {% endblock %}

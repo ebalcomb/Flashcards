@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="/static/css/local.css">
         <link rel="stylesheet" href="/static/css/font-awesome.min.css">
         <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <link href="http://fonts.googleapis.com/css?family=Allan:bold" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="/static/js/bootstrap.js"></script> 
         <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="/static/js/script.js"></script>
@@ -17,11 +21,10 @@
                     <ul class="nav">
                         <li><a href="{{url_for("index")}}">Flashcards</a></li>
                         {% if current_user.is_authenticated() %}
-                        <li><a href="{{url_for("view_user", id=current_user.id)}}">My Collections</a></li>
+                        <li><a href="{{url_for("view_user", id=current_user.id)}}">My Collection</a></li>
                         {%endif %}
-                        <li><a href="{{url_for("collections")}}">Browse Collections</a></li>
-                        <li><a href="{{url_for("about")}}">About</a></li>
-                        <li><a href="{{url_for("contact")}}">Contact</a></li>
+                        <li><a href="{{url_for("collections")}}">Browse Sets</a></li>
+                        <li><a href="{{url_for("about")}}">About Me</a></li>
 
                     </ul>
                     <ul class="nav pull-right">
@@ -43,5 +46,6 @@
             </ul>
         {% block body %}
         {% endblock %}
+        </div>
     </body>
 </html>

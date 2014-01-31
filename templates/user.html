@@ -3,11 +3,12 @@
 
 {% block body %}
 
-<h1>{{ first_name }}'s collections</h1>
+<div class="main2">{{ first_name }}'s collection</div>
 
 {% if user_id == current_user.id %}
 
-<h3>Create new</h3>
+<div class="main4">Create new</div>
+<br>
 <form id = "form_collection" method="post"> 
     <input type="text" name="title" placeholder="Collection Title"><br>
     <textarea name="description" placeholder="Description"></textarea><br>
@@ -16,15 +17,12 @@
 
 {% endif %}
 {% for collection in collections %}
+<a href="{{url_for("view_collection", id=collection.id)}}">
 	<div class="collection">
-		<a href="{{url_for("view_collection", id=collection.id)}}">
 		<p class="collection_title">{{collection.title}}</p>
 		<p class="collection_description">{{collection.description}}</p>
-		</a>
-		{% if collection.user_id == current_user.id %}
-		<a href="{{url_for("delete_collection", user_id=collection.user_id, collection_id=collection.id)}}"><div class="trash"><i class="icon-trash"></i></div></a>
-		{% endif %}
 	</div>
+</a>
 
 {% endfor %}
 

@@ -89,7 +89,7 @@ def create_collection(id):
         model.session.add(collection)
         model.session.commit()
 
-    return redirect(url_for("view_user", id=current_user.user_id))
+    return redirect(url_for("view_user", id=current_user.id))
 
 @app.route("/collections")
 def collections():

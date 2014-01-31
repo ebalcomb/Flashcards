@@ -27,3 +27,13 @@ $(document).ready(function() {
 		$(this).children(".secondary").addClass("invisible");
 	});
 });
+
+$(document).ready(function() {
+	$(".collection, .card, .term_show, .index_box").mouseenter(function(){
+		$(this).fadeTo("fast", 1.0);
+	});
+	$(".collection, .card, .term_show, .index_box").mouseleave(function(){
+		$(this).fadeTo("fast", 0.6);
+	});
+
+});
