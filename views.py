@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Post, Collection, Term
+from model import User, Collection, Term,Post
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 from flaskext.markdown import Markdown
 import config
@@ -84,7 +84,6 @@ def create_collection(id):
         flash("Error, all fields are required")
     else:
         collection = Collection(title=form.title.data, description=form.description.data, user_id=current_user.id)
-        #current_user.collections.append(collection)
 
         model.session.add(collection)
         model.session.commit()

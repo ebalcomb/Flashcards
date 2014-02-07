@@ -78,9 +78,6 @@ class Term(Base):
 
 
 
-
-
-
 def create_tables():
     Base.metadata.create_all(engine)
     u = User(email="test@test.com", first_name="John", last_name="Doe")
