@@ -20,8 +20,9 @@
 #register {font-size:25;height:35px;padding-top:20px;width:100px;}
 .register{text-align:right;margin-right: 18px;margin-top: 30px;}
 
-.about {background-color:white;border-radius: 20px;width:400px;height:480px;float:right;margin-top: 60px;opacity:.85;box-shadow: 3px 3px 5px 2px black;}
-.about_text {font-size: 20;padding:20px;}
+.about {font-size: 20;background-color:white;border-radius: 20px;width:400px;height:480px;float:right;margin-top: 60px;opacity:.85;box-shadow: 3px 3px 5px 2px black;}
+.about_text {font-size: 20;padding-top:40px;padding-left:40px; padding-right:40px;line-height: 150%;}
+.contact_links {font-size: 15; text-align: center;}
 
 .term_show {opacity:0.6;background-color:white; border-radius: 20px; width:200px; padding: 20px; margin:10px;float:right;box-shadow: 3px 3px 5px 2px black;}
 .term {background-color:white; border-radius: 20px; margin:10px;float:left;}
